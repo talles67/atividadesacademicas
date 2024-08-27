@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Atividades Acadêmicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #444;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: #fff;
+            cursor: pointer;
+        }
+        .input-group button:hover {
+            background-color: #4cae4c;
+        }
+        .file-upload {
+            margin-bottom: 15px;
+        }
+        .file-upload input {
+            display: none;
+        }
+        .file-upload label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5bc0de;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .file-list {
+            margin-top: 10px;
+        }
+        .file-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            background: #eee;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Atividades Acadêmicas</h1>
+
+        <!-- Registro de Atividade -->
+        <div class="section">
+            <h2>Adicionar Atividade</h2>
+            <form id="activity-form">
+                <div class="input-group">
+                    <label for="activity-title">Título da Atividade:</label>
+                    <input type="text" id="activity-title" name="title" required>
+                </div>
+                <div class="input-group">
+                    <label for="activity-description">Descrição:</label>
+                    <textarea id="activity-description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="activity-date">Data:</label>
+                    <input type="date" id="activity-date" name="date" required>
+                </div>
+                <div class="file-upload">
+                    <label for="file-upload">Anexar Arquivo:</label>
+                    <input type="file" id="file-upload" name="file">
+                    <label for="file-upload">Escolher arquivo</label>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Adicionar Atividade</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de Atividades -->
+        <div class="section">
+            <h2>Atividades Registradas</h2>
+            <div id="activity-list">
+                <!-- As atividades adicionadas serão listadas aqui -->
+            </div>
+        </div>
+
+        <!-- Lembretes -->
+        <div class="section">
+            <h2>Lembretes</h2>
+            <form id="reminder-form">
+                <div class="input-group">
+                    <label for="reminder-text">Novo Lembrete:</label>
+                    <input type="text" id="reminder-text" name="reminder" required>
+                </div>
+                <div class="input-group">
+                    <button type="submit">Adicionar Lembrete</button>
+                </div>
+            </form>
+            <div id="reminder-list">
+                <!-- Os lembretes adicionados serão listados aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para adicionar atividades
+        document.getElementById('activity-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('activity-title').value;
+            const description = document.getElementById('activity-description').value;
+            const date = document.getElementById('activity-date').value;
+            const file = document.getElementById('file-upload').files[0];
+
+            const activityList = document.getElementById('activity-list');
+            const listItem = document.createElement('div');
+            listItem.classList.add('file-list');
+            listItem.innerHTML = `<strong>${title}</strong> <br>${description} <br> Data: ${date} <br> ${file ? 'Arquivo: ' + file.name : ''}`;
+            activityList.appendChild(listItem);
+
+            // Limpar o formulário
+            document.getElementById('activity-form').reset();
+        });
+
+        // Função para adicionar lembretes
+        document.getElementById('reminder-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const reminderText = document.getElementById('reminder-text').value;
+
+            const reminderList = document.getElementById('reminder-list');
+            const listItem = document.createElement('div');
+            listItem.classList.add('file-list');
+            listItem.innerHTML = reminderText;
+            reminderList.appendChild(listItem);
+
+            // Limpar o formulário
+            document.getElementById('reminder-form').reset();
+        });
+    </script>
+</body>
+</html>
